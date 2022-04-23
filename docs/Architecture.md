@@ -24,11 +24,11 @@
 # Next Architecture
 
 ## App Component
+* Game state
 * Input Form
 * Game Info - cards remaining, sets on table
 * Scores
 * Tabletop
-* Game state
 * Rules explanation
 * A chat stream with numbers converted to card images with green check or red x
 
@@ -48,7 +48,7 @@
 * Ties broken by turn their latest set was found
 
 ## Tabletop
-* Grid of cards. 7 columns by 3 rows, usually only 4 columns used
+* Grid of cards. 7 columns by 3 rows, usually only 4 columns used. Maybe dynamically sized so cards are larger at 4 columns
 
 ## Card
 * Programmatically created SVG element rendering the shapes on the card with the appropriate color, shading, and count. Also labels the card with its number to be used when calling a set
