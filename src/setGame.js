@@ -8,6 +8,15 @@ export default class SetGame {
         this.restartGame();
     }
 
+    clone() {
+        var clone = new SetGame();
+        clone.deck = this.deck;
+        clone.on_table = this.on_table;
+        clone.isGameOver = this.isGameOver;
+        clone.scores = this.scores;
+        return clone;
+    }
+
     restartGame() {
         if (this.isGameOver) {
             this.initializeDeck();
@@ -40,20 +49,25 @@ export default class SetGame {
     }
 
     replaceCards(cardIdxs) {
-        if (this.deck.length > 0) {
-            for (var i = 0; i < cardIdxs.length; i++) {
-                var new_card = this.deck.pop();
-                this.on_table.splice(cardIdxs[i], 1, new_card)
-            }
-        } else {
-            for (var j = 0; j < cardIdxs.length; j++) {
-                this.on_table.splice(cardIdxs[j], 1, -1) 
-            }
-            for (var k = this.on_table.length-1; k >= 0; k--) {
-                if (this.on_table[k] === -1) {
+        for (var j = 0; j < cardIdxs.length; j++) {
+            this.on_table.splice(cardIdxs[j], 1, -1) 
+        }
+        for (var k = 0; k < this.on_table.length; k++) {
+            if (this.on_table[k] === -1) {
+                var replacement = -1;
+                while (this.on_table.length > 12 && replacement === -1) {
+                    replacement = this.on_table.pop();
+                }
+                if (replacement === -1 && this.deck.length > 0) {
+                    replacement = this.deck.pop();
+                }
+                if (replacement === -1) {
                     this.on_table.splice(k, 1);
-                } 
-            }
+                } else {
+                    this.on_table.splice(k, 1, replacement);
+                }
+                k--;
+            } 
         }
         
         this.ensureSetOnTable();
@@ -78,6 +92,8 @@ export default class SetGame {
             this.deck.push(i);
         }
         this.shuffleDeck();
+        //var capSet = [28, 46, 10, 70, 7, 25, 31, 49, 13, 44, 17, 39, 3, 21, 36, 54, 72, 42, 6, 24].map(val => val-1);
+        //this.deck = this.deck.filter(val => !capSet.includes(val)).concat(capSet);
     }
     
     shuffleDeck() {
@@ -95,10 +111,10 @@ export default class SetGame {
         var shape = [];
         var shading = [];
         for (var idx in possible_set) {
-            color.push(this.getColor(possible_set[idx]));
-            number.push(this.getNumber(possible_set[idx]));
-            shape.push(this.getShape(possible_set[idx]));
-            shading.push(this.getShading(possible_set[idx]));
+            color.push(SetGame.getColor(possible_set[idx]));
+            number.push(SetGame.getNumber(possible_set[idx]));
+            shape.push(SetGame.getShape(possible_set[idx]));
+            shading.push(SetGame.getShading(possible_set[idx]));
         }
         return [ 
            this.arrSum(color) % 3,
@@ -128,19 +144,19 @@ export default class SetGame {
         return arr.reduce((a,b) => a + b, 0);
     }
 
-    getColor(card) {
+    static getColor(card) {
         return Math.floor(card / 27);
     }
     
-    getNumber(card) {
+    static getNumber(card) {
         return card % 3;
     }
     
-    getShape(card) {
+    static getShape(card) {
         return Math.floor((card % 9) / 3);
     }
     
-    getShading(card) {
+    static getShading(card) {
         return Math.floor((card % 27) / 9);
     }
 }
