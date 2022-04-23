@@ -33,8 +33,8 @@
 * A chat stream with numbers converted to card images with green check or red x
 
 ## Input Form
-* Text field for Twitch channel name + dis/connect button
-* Text field for Set numbers + submit button
+* [x] Text field for Twitch channel name + dis/connect button
+* [x] Text field for Set numbers + submit button
 * Maybe a checkbox to only show one or the other?
 
 ## Game Info Panel

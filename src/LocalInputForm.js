@@ -13,6 +13,7 @@ function LocalInputForm({dispatch, ...props}) {
                 card2: nums[1],
                 card3: nums[2]
             });
+            setCards("");
         }
         event.preventDefault();
     };
