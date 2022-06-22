@@ -2,8 +2,13 @@ import './App.css';
 import SetGame from './SetGame'
 import React, {useReducer} from "react"
 import InputForm from './InputForm';
-import Tabletop from './Tabletop';
+//import PngTabletop from './PngTabletop';
+import SvgTabletop from './SvgTabletop';
 import Rules from './Rules';
+import GameInfo from './GameInfo';
+import Scores from './Scores';
+//import PngGuessHistory from './PngGuessHistory';
+import SvgGuessHistory from './SvgGuessHistory';
 
 function updateGame(game, updateData) {
   var nextState = game.clone();
@@ -25,14 +30,12 @@ function App() {
 
   return (
     <div className="App">
-      <div>
         <InputForm dispatch={dispatch} />
+        <GameInfo game={game} />
         <Rules />
-        <label>Game Over: {game.isGameOver ? "yes" : "no"}</label><br/>
-        <label>Cards in deck: {game.deck.length}</label><br/>
-        <label>Sets on table: {game.countSets(game.on_table)}</label>
-      </div>
-      <Tabletop game={game} />
+        <Scores game={game} /> 
+        <SvgTabletop game={game} />
+        <SvgGuessHistory game={game} />
     </div>
   );
 }

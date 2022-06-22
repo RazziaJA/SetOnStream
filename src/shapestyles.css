@@ -1,0 +1,38 @@
+svg {
+    stroke-width: 4;
+}
+
+.red {
+    --card-color: red;
+    stroke: var(--card-color);
+}
+.green {
+    --card-color: green;
+    stroke: var(--card-color);
+}
+.purple {
+    --card-color: purple;
+    stroke: var(--card-color);
+}
+
+line {
+    stroke: inherit;
+}
+.red-striped {
+    fill: url(Shapes.svg#red-striped);
+}
+.green-striped {
+    fill: url(Shapes.svg#green-striped);
+}
+.purple-striped {
+    fill: url(Shapes.svg#purple-striped);
+}
+.stripe {
+    stroke: var(--card-color)
+}
+.empty {
+    fill: none;
+}
+.solid {
+    fill: var(--card-color);
+}

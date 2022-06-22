@@ -19,20 +19,22 @@ function genLayout(count, cols) {
     })
   }
 
-export default function Tabletop({game, ...props}) {
+export default function PngTabletop({game, ...props}) {
     var layout = genLayout(21, 7);
 
     return (
-    <ResponsiveReactGridLayout
-        className="layout"
-        layout={layout}
-        cols={7}
-        //rowHeight={200}
-      >
-        {game.on_table.map((deckId, tblIdx) => {
-          return (
-            <LabelledSetSprite key={tblIdx.toString()} tblIdx={tblIdx} card={deckId} />
-          );
-        })}
-      </ResponsiveReactGridLayout>);
+        <div className="Tabletop">
+            <ResponsiveReactGridLayout
+                className="layout"
+                layout={layout}
+                cols={7}
+                //rowHeight={200}
+            >
+                {game.on_table.map((deckId, tblIdx) => {
+                return (
+                    <LabelledSetSprite key={tblIdx.toString()} tblIdx={tblIdx} card={deckId} />
+                );
+                })}
+            </ResponsiveReactGridLayout>
+      </div>);
 }

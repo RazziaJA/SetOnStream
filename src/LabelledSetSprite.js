@@ -32,7 +32,7 @@ function genSpriteSheet() {
   const LabelledSetSprite = React.forwardRef(({style, className, ...props}, ref) => {
     return (
       <div style={{...style}} className={className} ref={ref}>
-        <label>{props.tblIdx+1} </label>
+        {props.tblIdx != undefined && <label>{props.tblIdx+1} </label>}
         <SpriteSheet filename={setCards} data={spriteSheet} sprite={props.card.toString()} />
       </div>
     );

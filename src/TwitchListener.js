@@ -1,12 +1,14 @@
 import React, {useState, useEffect} from "react"
+import TwitchInfoTooltipIcon from "./TwitchInfoTooltipIcon";
 const tmi = require('tmi.js');
 
 function TwitchListener({ dispatch, ...props}) {
     const [channel, setChannel] = useState(undefined);
     const [input, setInput] = useState("");
+    const [isConnected, setIsConnected] = useState(false);
 
     useEffect(() => {
-        if (channel === undefined) {
+        if (channel === undefined || channel.length < 1) {
             return;
         }
         var client = new tmi.Client({
@@ -14,6 +16,7 @@ function TwitchListener({ dispatch, ...props}) {
             channels: [channel]
         });
         client.connect();
+        setIsConnected(true);
         client.on('message', (channel, tags, message, self) => {
             if (!self) {
                 const args = message.split(' ');
@@ -40,21 +43,28 @@ function TwitchListener({ dispatch, ...props}) {
         
         return function cleanup() {
             client.disconnect();
+            setIsConnected(false);
         }
     }, [channel, dispatch]); // useReducer guarantees dispatch won't ever change, just listed here as a dep to appease the linter
 
     var handleSubmit = function(event) {
-        setChannel(input === undefined ? input : input.toLowerCase());
+        if (isConnected) {
+            setChannel(undefined);
+        } else {
+            setChannel(input === undefined ? input : input.toLowerCase());
+        }
         event.preventDefault();
     };
 
     return (
         <form onSubmit={handleSubmit}>
-        <label>
-            Twitch Channel: 
-            <input type="text" value={input} onChange={event => setInput(event.target.value)}/>
-        </label>
-        <input type="submit" value="Connect"/>
+            <label>
+                Twitch Channel: 
+            </label><br/>
+            <input type="text" value={input} onChange={event => setInput(event.target.value)}/><br/>
+            <input type="submit" value={(isConnected ? "Disc" : "C") + "onnect"}/>
+            <label>{isConnected ? "🔗" : ""}</label>
+            <TwitchInfoTooltipIcon/>
         </form>
     );
 }

@@ -4,16 +4,18 @@ export default class SetGame {
         this.on_table = [];
         this.isGameOver = true;
         this.scores = {};
+        this.guesses = [];
 
         this.restartGame();
     }
 
     clone() {
         var clone = new SetGame();
-        clone.deck = this.deck;
-        clone.on_table = this.on_table;
+        clone.deck = [...this.deck];
+        clone.on_table = [...this.on_table];
         clone.isGameOver = this.isGameOver;
-        clone.scores = this.scores;
+        clone.scores = structuredClone(this.scores);
+        clone.guesses = [...this.guesses];
         return clone;
     }
 
@@ -22,6 +24,7 @@ export default class SetGame {
             this.initializeDeck();
             this.dealCards();
             this.scores = {};
+            this.guesses = [];
             this.isGameOver = false;
         }
     }
@@ -37,12 +40,17 @@ export default class SetGame {
     checkSet(player, tableIndices) {
         var possible_set = tableIndices.map(x => this.on_table[x]);
         const features = this.getFeatures(possible_set);
-        if (this.isSet(features)) {
-            this.replaceCards(tableIndices);
+        var isSet = this.isSet(features);
+        this.guesses.push({playerName: player, guess: possible_set, wasSet: isSet});
+        this.guesses = this.guesses.slice(-15);
+        if (isSet) {
+            var turn = (81 - (this.deck.length + this.on_table.length)) / 3;
             if (!this.scores[player]) {
-                this.scores[player] = 0;
+                this.scores[player] = {score: 0, turn: turn};
             }
-            this.scores[player]++;
+            this.scores[player] = {score: this.scores[player].score + 1, turn: turn }
+
+            this.replaceCards(tableIndices);
         }
 
         this.isGameOver = this.countSets(this.on_table) === 0;
@@ -53,7 +61,10 @@ export default class SetGame {
             this.on_table.splice(cardIdxs[j], 1, -1) 
         }
         for (var k = 0; k < this.on_table.length; k++) {
-            if (this.on_table[k] === -1) {
+            while (this.on_table.at(-1) === -1) {
+                this.on_table.splice(-1, 1);
+            }
+            if (k < this.on_table.length && this.on_table[k] === -1) {
                 var replacement = -1;
                 while (this.on_table.length > 12 && replacement === -1) {
                     replacement = this.on_table.pop();
@@ -69,15 +80,18 @@ export default class SetGame {
                 k--;
             } 
         }
+        while (this.deck.length > 0 && this.on_table.length < 12) {
+            this.on_table.push(this.deck.pop());
+        }
         
         this.ensureSetOnTable();
     }
 
     ensureSetOnTable() {
         while ((this.countSets(this.on_table) === 0) && (this.deck.length > 0)) {
-            for (var i = 0; i < 3; ++i) {
+            do {
                 this.on_table.push(this.deck.pop());
-            }
+            } while (this.on_table.length % 3 !== 0 && this.deck.length > 0)
         }
     }
 

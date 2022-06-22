@@ -1,5 +1,28 @@
 .App {
   text-align: center;
+  display: grid;
+  grid-template-columns: 15fr 65fr 20fr;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "inputform rules gameinfo"
+    "scores tabletop guesshistory";
+  place-items: start;
+}
+
+body {
+  background-color: gray;
+}
+
+label, p {
+  font-size: x-large;
+}
+
+input {
+  font-size: larger;
+}
+
+ol li {
+  font-size: x-large;
 }
 
 .App-logo {
@@ -28,6 +51,40 @@
   color: #61dafb;
 }
 
+.inputform {
+  grid-area: inputform;
+}
+
+.rules {
+  grid-area: rules;
+}
+
+.gameinfo {
+  grid-area: gameinfo;
+}
+
+.scores {
+  grid-area: scores;
+}
+
+.Tabletop {
+  grid-area: tabletop;
+}
+
+.GuessedCards {
+  grid-area: guesshistory;
+}
+
+.TopRegion {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.BottomRegion {
+  display: flex;
+  justify-content: space-between;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +92,22 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.twitch-info-tooltip-icon {
+  display: inline-block;
+  margin-left: .5rem;
+}
+
+.twitch-info-tooltip-popup {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border-color: black;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.twitch-info-icon:hover~.twitch-info-tooltip-popup {
+  display: block
 }

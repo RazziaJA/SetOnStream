@@ -52,6 +52,3 @@
 
 ## Card
 * Programmatically created SVG element rendering the shapes on the card with the appropriate color, shading, and count. Also labels the card with its number to be used when calling a set
-
-
-Dark mode
