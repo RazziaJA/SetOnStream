@@ -31,7 +31,7 @@ function App() {
   return (
     <div className="App">
         <InputForm dispatch={dispatch} />
-        <GameInfo game={game} />
+        <GameInfo game={game} dispatch={dispatch} />
         <Rules />
         <Scores game={game} /> 
         <SvgTabletop game={game} />

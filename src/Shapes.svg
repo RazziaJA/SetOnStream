@@ -60,26 +60,6 @@
     </symbol>
 
     <symbol id="squiggle" width="50" height="100" viewBox="-10 -10 70 120">
-        <!-- straight edges form parallelogram with x vals 20,40,, 10,30 and y vals 35,65
-        <path d="M 20,35
-                A 30,15 20,1,1 40,35
-                L 30,65
-                A 20,15 30,1,1 10,65
-                z" /> -->
-
-                <!-- 
-                    x coords: 0, 15, 20, 30, 35, 50
-                    y coords: 0, 17, 34, 66, 83, 100
-                    x, y, slope
-                    1: 20, 0, h
-                    2: 50, 34, v
-                    3: 35, 66, v
-                    4: 50, 83, v
-                    5: 30, 100, h
-                    6: 0, 66, v
-                    7: 15, 34, v
-                    8: 0, 17, v
-                -->
         <path d="M 20,0
                 C 30,0 50,24 50,34
                 S 35,56 35,66
@@ -90,11 +70,6 @@
                 S 0,27 0,17
                 S 10,0 20,0
                 " />
-
-        <!-- Two ellipses barely intersecting each other at 20,50 and 30,50
-        <path d="M 20,50
-                A 20,10 20,1,1 30,50
-                A 20,10 20,1,1 20,50" /> -->
     </symbol>
 
     <rect x="0" y="0" width="100%" height="100%" fill="white"/>

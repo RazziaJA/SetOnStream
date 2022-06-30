@@ -20,13 +20,11 @@ export default class SetGame {
     }
 
     restartGame() {
-        if (this.isGameOver) {
-            this.initializeDeck();
-            this.dealCards();
-            this.scores = {};
-            this.guesses = [];
-            this.isGameOver = false;
-        }
+        this.initializeDeck();
+        this.dealCards();
+        this.scores = {};
+        this.guesses = [];
+        this.isGameOver = false;
     }
     
     dealCards() {
