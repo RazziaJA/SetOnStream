@@ -2,13 +2,17 @@ import React, {useState, useEffect} from "react"
 import TwitchInfoTooltipIcon from "./TwitchInfoTooltipIcon";
 const tmi = require('tmi.js');
 
-function TwitchListener({ dispatch, ...props}) {
-    const [channel, setChannel] = useState(undefined);
+function TwitchListener({ dispatch, twitchChannel, ...props}) {
+    const [channel, setChannel] = useState(twitchChannel);
     const [input, setInput] = useState("");
     const [isConnected, setIsConnected] = useState(false);
 
+    if (twitchChannel !== null && twitchChannel !== channel) {
+        setChannel(twitchChannel);
+    }
+
     useEffect(() => {
-        if (channel === undefined || channel.length < 1) {
+        if (channel === null || channel === undefined || channel.length < 1) {
             return;
         }
         var client = new tmi.Client({
@@ -55,6 +59,10 @@ function TwitchListener({ dispatch, ...props}) {
         }
         event.preventDefault();
     };
+
+    if (twitchChannel !== null) {
+        return (<label>{isConnected ? `Connected to channel: ${twitchChannel} 🔗` : ""}</label>);
+    }
 
     return (
         <form onSubmit={handleSubmit}>

@@ -2,12 +2,11 @@ import React from "react"
 import LocalInputForm from "./LocalInputForm";
 import TwitchListener from "./TwitchListener";
 
-function InputForm({dispatch, ...props}) {
-    // TODO add a switch or checkbox(es) to hide one of the input methods
+function InputForm({dispatch, twitchChannel, ...props}) {
     return (
         <div className="inputform">
-            <LocalInputForm dispatch={dispatch} />
-            <TwitchListener dispatch={dispatch} />
+            {twitchChannel === null && <LocalInputForm dispatch={dispatch} />}
+            <TwitchListener dispatch={dispatch} twitchChannel={twitchChannel} />
         </div>
     );
 }

@@ -1,6 +1,6 @@
 import './App.css';
 import SetGame from './SetGame'
-import React, {useReducer} from "react"
+import React, {useReducer, useState, useEffect} from "react"
 import InputForm from './InputForm';
 //import PngTabletop from './PngTabletop';
 import SvgTabletop from './SvgTabletop';
@@ -9,6 +9,7 @@ import GameInfo from './GameInfo';
 import Scores from './Scores';
 //import PngGuessHistory from './PngGuessHistory';
 import SvgGuessHistory from './SvgGuessHistory';
+import {useLocation} from 'react-router-dom';
 
 function updateGame(game, updateData) {
   var nextState = game.clone();
@@ -27,10 +28,17 @@ function updateGame(game, updateData) {
 
 function App() {
   const [game, dispatch] = useReducer(updateGame, new SetGame());
+  const [twitchChannel, setTwitchChannel] = useState(null);
+  const location = useLocation();
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const channel = queryParams.get("twitch-channel");
+    setTwitchChannel(channel);
+  }, [])
 
   return (
     <div className="App">
-        <InputForm dispatch={dispatch} />
+        <InputForm dispatch={dispatch} twitchChannel={twitchChannel} />
         <GameInfo game={game} dispatch={dispatch} />
         <Rules />
         <Scores game={game} /> 

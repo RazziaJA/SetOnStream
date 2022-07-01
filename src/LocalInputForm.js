@@ -22,7 +22,7 @@ function LocalInputForm({dispatch, ...props}) {
         <form onSubmit={handleSubmit}>
             <label>
                 Cards: 
-                <input type="text" value={cards} onChange={event => setCards(event.target.value)}/>
+                <input type="text" value={cards} onChange={event => setCards(event.target.value)} size="10"/>
             </label>
             <input type="submit" value="Submit"/>
         </form>
