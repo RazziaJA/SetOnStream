@@ -52,3 +52,6 @@
 
 ## Card
 * Programmatically created SVG element rendering the shapes on the card with the appropriate color, shading, and count. Also labels the card with its number to be used when calling a set
+
+TODOs:
+[ ] redo game logic code to track sets on table rather than iterating over it every time we need to know how many sets there are. should save cycles and also enable a hint function
