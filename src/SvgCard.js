@@ -1,5 +1,4 @@
 import SetGame from './SetGame'
-import shapefile from './Shapes.svg'
 
 const SHAPE_COORDS = {
     0: [{x: 37.5}],
@@ -26,7 +25,7 @@ export default function SvgCard({tblIdx, card, cardX, cardY, cardWidth, cardHeig
                     return (
                         <use
                         key={idx}
-                        href={`${shapefile}#${SHAPES[shape]}`}
+                        href={`#${SHAPES[shape]}`}
                         x={`${coords["x"]}%`}
                         y='15%'
                         width='25%'

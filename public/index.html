@@ -28,16 +28,50 @@
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
+
     <div id="root" style="height: 100%;"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" stroke="black" stroke-width="4" width="0" height="0">
+      <defs>
+          <pattern id="red-striped" width="10%" height="10%" viewBox="0 0 4 4" stroke="red">
+              <line x1="0" y="0" x2="4" y2="0"/>
+          </pattern>
+          <pattern id="green-striped" width="10%" height="10%" viewBox="0 0 4 4" stroke="green">
+              <line x1="0" y="0" x2="4" y2="0"/>
+          </pattern>
+          <pattern id="purple-striped" width="10%" height="10%" viewBox="0 0 4 4" stroke="purple">
+              <line x1="0" y="0" x2="4" y2="0"/>
+          </pattern>
+      </defs>
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+      <symbol id="oval" width="50" height="100" viewBox="-10 -10 70 120">
+          <path d="M 0,20
+                  L 0,80
+                  A 25,20, 0,0,0, 50,80
+                  L 50,20
+                  A 25,20, 0,0,0, 0,20" />
+      </symbol>
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
+      <symbol id="diamond" width="50" height="100" viewBox="-10 -10 70 120">
+          <path d="M 0,50
+                  L 25,100
+                  L 50,50
+                  L 25,0
+                  z" />
+      </symbol>
+
+      <symbol id="squiggle" width="50" height="100" viewBox="-10 -10 70 120">
+          <path d="M 20,0
+                  C 30,0 50,24 50,34
+                  S 35,56 35,66
+                  S 50,73 50,83
+                  S 40,100 30,100
+                  S 0,76 0,66
+                  S 15,44 15,34
+                  S 0,27 0,17
+                  S 10,0 20,0
+                  " />
+      </symbol>
+  </svg>
   </body>
 </html>

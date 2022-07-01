@@ -15,20 +15,14 @@ svg {
     stroke: var(--card-color);
 }
 
-line {
-    stroke: inherit;
-}
 .red-striped {
-    fill: url(Shapes.svg#red-striped);
+    fill: url(#red-striped);
 }
 .green-striped {
-    fill: url(Shapes.svg#green-striped);
+    fill: url(#green-striped);
 }
 .purple-striped {
-    fill: url(Shapes.svg#purple-striped);
-}
-.stripe {
-    stroke: var(--card-color)
+    fill: url(#purple-striped);
 }
 .empty {
     fill: none;
