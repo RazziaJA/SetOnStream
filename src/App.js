@@ -10,6 +10,17 @@ import Scores from './Scores';
 //import PngGuessHistory from './PngGuessHistory';
 import SvgGuessHistory from './SvgGuessHistory';
 import {useLocation} from 'react-router-dom';
+import {ErrorBoundary} from 'react-error-boundary'
+
+function ErrorFallback({error, resetErrorBoundary}) {
+  return (
+    <div>
+      <p>Something went wrong:</p>
+      <pre>{error.message}</pre>
+      <button onClick={resetErrorBoundary}>Try again</button>
+    </div>
+  )
+}
 
 function updateGame(game, updateData) {
   var nextState = game.clone();
@@ -34,16 +45,28 @@ function App() {
     const queryParams = new URLSearchParams(location.search);
     const channel = queryParams.get("twitch-channel");
     setTwitchChannel(channel);
-  }, [])
+  }, [location.search])
 
   return (
     <div className="App">
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <InputForm dispatch={dispatch} twitchChannel={twitchChannel} />
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <GameInfo game={game} dispatch={dispatch} />
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Rules />
-        <Scores game={game} /> 
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Scores game={game} />
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <SvgTabletop game={game} />
+      </ErrorBoundary>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <SvgGuessHistory game={game} />
+      </ErrorBoundary>
     </div>
   );
 }
