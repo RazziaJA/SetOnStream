@@ -28,4 +28,5 @@ Once you've customized your URL consider adding it as a bookmark or to a Browser
 [ ] Make "Sets on Table" indicator optional  
 [ ] Customize minimum number of cards on the table (e.g., 15 instead of 12)  
 [ ] Accept comma-separated guesses  
+[ ] New Game confirmation prompt  
 [ ] Penalty for incorrect guesses (solo mode only?)  
