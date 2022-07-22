@@ -95,20 +95,21 @@ ol li {
   }
 }
 
-.twitch-info-tooltip-icon {
+.info-tooltip-icon {
   display: inline-block;
   margin-left: .5rem;
 }
 
-.twitch-info-tooltip-popup {
+.info-tooltip-popup {
   display: none;
   position: absolute;
   background-color: white;
   border-color: black;
   border-width: 1px;
   border-style: solid;
+  padding: 5px;
 }
 
-.twitch-info-icon:hover~.twitch-info-tooltip-popup {
+.info-icon:hover~.info-tooltip-popup {
   display: block
 }

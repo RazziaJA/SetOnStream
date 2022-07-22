@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import InfoTooltipIcon from "./InfoTooltipIcon";
 
 function LocalInputForm({dispatch, ...props}) {
     const [input, setInput] = useState("");
@@ -38,6 +39,14 @@ function LocalInputForm({dispatch, ...props}) {
                 <input type="text" value={input} onChange={event => setInput(event.target.value)} size="10"/>
             </label>
             <input type="submit" value="Submit"/>
+            <InfoTooltipIcon>
+                <div style={{textAlign: "left"}}>
+                    Commands:<br/>
+                    x y z: Guess cards x,y,z are a set<br/>
+                    restart: Start a new game<br/>
+                    hint: Highlight one card of one set with a green border<br/>
+                </div>
+            </InfoTooltipIcon>
         </form>
     );
 }

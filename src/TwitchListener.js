@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react"
-import TwitchInfoTooltipIcon from "./TwitchInfoTooltipIcon";
+import InfoTooltipIcon from "./InfoTooltipIcon";
 const tmi = require('tmi.js');
 
 function TwitchListener({ dispatch, twitchChannel, ...props}) {
@@ -72,7 +72,9 @@ function TwitchListener({ dispatch, twitchChannel, ...props}) {
             <input type="text" value={input} onChange={event => setInput(event.target.value)}/><br/>
             <input type="submit" value={(isConnected ? "Disc" : "C") + "onnect"}/>
             <label>{isConnected ? "🔗" : ""}</label>
-            <TwitchInfoTooltipIcon/>
+            <InfoTooltipIcon>
+                Enter your Twitch channel name and click connect to start listening for guesses from your Twitch chatters.
+            </InfoTooltipIcon>
         </form>
     );
 }
