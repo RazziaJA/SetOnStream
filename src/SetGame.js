@@ -5,6 +5,7 @@ export default class SetGame {
         this.isGameOver = true;
         this.scores = {};
         this.guesses = [];
+        this.firstSet = [];
 
         this.restartGame();
     }
@@ -16,6 +17,7 @@ export default class SetGame {
         clone.isGameOver = this.isGameOver;
         clone.scores = structuredClone(this.scores);
         clone.guesses = [...this.guesses];
+        clone.firstSet = [...this.firstSet];
         return clone;
     }
 
@@ -25,6 +27,7 @@ export default class SetGame {
         this.scores = {};
         this.guesses = [];
         this.isGameOver = false;
+        this.firstSet = [];
     }
     
     dealCards() {
@@ -52,6 +55,7 @@ export default class SetGame {
         }
 
         this.isGameOver = this.countSets(this.on_table) === 0;
+        return isSet;
     }
 
     replaceCards(cardIdxs) {
@@ -141,7 +145,12 @@ export default class SetGame {
         for (var i = 0; i < cards.length; i++) {
             for (var j = i + 1; j < cards.length; j++) {
                 for (var k = j + 1; k < cards.length; k++) {
-                    count = (this.isSet(this.getFeatures([cards[i], cards[j], cards[k]])) ? count + 1 : count);   
+                    if (this.isSet(this.getFeatures([cards[i], cards[j], cards[k]]))) {
+                        if (count === 0) {
+                            this.firstSet = [i, j, k];
+                        }
+                        count = count + 1;
+                    }
                 }
             }
         }

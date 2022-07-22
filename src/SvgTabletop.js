@@ -5,9 +5,10 @@ import shapestyles from './shapestyles.css'
 const NUM_ROWS = 3;
 const ROW_HEIGHT_PCT = 100.0/NUM_ROWS;
 
-export default function SvgTabletop({game, ...props}) {
+export default function SvgTabletop({game, showHint, ...props}) {
     var num_cols = game.on_table.length / 3;
     var col_width_pct = 100.0/num_cols;
+    var hintHighlight = showHint && !game.isGameOver ? game.firstSet[0] : -1;
     return (
         <div className="Tabletop">
             <svg x="0" y="0" viewBox="0 0 900 500" className="CardContainer" preserveAspectRatio="xMinYMin">
@@ -22,7 +23,8 @@ export default function SvgTabletop({game, ...props}) {
                             cardX={Math.floor((tblIdx/3))*col_width_pct}
                             cardY={(tblIdx%3)*ROW_HEIGHT_PCT}
                             cardWidth={col_width_pct}
-                            cardHeight={ROW_HEIGHT_PCT}/>
+                            cardHeight={ROW_HEIGHT_PCT}
+                            highlight={hintHighlight === tblIdx} />
                     );
                 })}
             </svg>

@@ -22,23 +22,29 @@ function ErrorFallback({error, resetErrorBoundary}) {
   )
 }
 
-function updateGame(game, updateData) {
-  var nextState = game.clone();
+function updateGame({game, showHint}, updateData) {
+  var nextGameState = game.clone();
+  var nextShowHint = showHint;
   switch (updateData.type) {
     case 'restart':
-      nextState.restartGame();
+      nextGameState.restartGame();
       break;
     case 'callSet':
-      nextState.checkSet(updateData.playerName, [updateData.card1 - 1, updateData.card2 - 1, updateData.card3 - 1]);
+      if (nextGameState.checkSet(updateData.playerName, [updateData.card1 - 1, updateData.card2 - 1, updateData.card3 - 1])) {
+        nextShowHint = false;
+      }
+      break;
+    case 'setShowHint':
+      nextShowHint = updateData.showHint;
       break;
     default:
       break;
   }
-  return nextState;
+  return {game: nextGameState, showHint: nextShowHint};
 }
 
 function App() {
-  const [game, dispatch] = useReducer(updateGame, new SetGame());
+  const [{game, showHint}, dispatch] = useReducer(updateGame, {game: new SetGame(), showHint: false});
   const [twitchChannel, setTwitchChannel] = useState(null);
   const location = useLocation();
   useEffect(() => {
@@ -62,7 +68,7 @@ function App() {
         <Scores game={game} />
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
-        <SvgTabletop game={game} />
+        <SvgTabletop game={game} showHint={showHint} />
       </ErrorBoundary>
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <SvgGuessHistory game={game} />

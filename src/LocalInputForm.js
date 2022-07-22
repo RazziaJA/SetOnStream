@@ -1,19 +1,32 @@
 import React, {useState} from "react"
 
 function LocalInputForm({dispatch, ...props}) {
-    const [cards, setCards] = useState("");
+    const [input, setInput] = useState("");
 
     var handleSubmit = function(event) {
-        var nums = cards.split(" ");
-        if (nums.length === 3) {
+        var split = input.split(" ");
+        if (split.length === 3) {
             dispatch({
                 type: 'callSet',
                 playerName: "Host",
-                card1: nums[0],
-                card2: nums[1],
-                card3: nums[2]
+                card1: split[0],
+                card2: split[1],
+                card3: split[2]
             });
-            setCards("");
+            setInput("");
+        }
+        if (split.length === 1 && split[0].toLowerCase() === "hint") {
+            dispatch({
+                type: 'setShowHint',
+                showHint: true
+            });
+            setInput("");
+        }
+        if (split.length === 1 && split[0].toLowerCase() === "restart") {
+            dispatch({
+                type: 'restart'
+            });
+            setInput("");
         }
         event.preventDefault();
     };
@@ -22,7 +35,7 @@ function LocalInputForm({dispatch, ...props}) {
         <form onSubmit={handleSubmit}>
             <label>
                 Cards: 
-                <input type="text" value={cards} onChange={event => setCards(event.target.value)} size="10"/>
+                <input type="text" value={input} onChange={event => setInput(event.target.value)} size="10"/>
             </label>
             <input type="submit" value="Submit"/>
         </form>

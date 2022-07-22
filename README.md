@@ -20,7 +20,7 @@ Once you've customized your URL consider adding it as a bookmark or to a Browser
 [ ] Hideable scores, game info. really try to get as much space as possible for tabletop, so it's visible on mobile  
 [ ] Differentiate sections - maybe a border or different background for tabletop, scores, etc.  
 [ ] More noticeable guess-correctness indicator (border/background in addition to check mark or X)  
-[ ] Hint function  
+[/] Hint function (implemented for local play only atm)  
 [ ] Animate card drawing  
 [ ] More clear game over indication - fireworks? winner callout?  
 [ ] Change numbering scheme so all/most cards are single characters (hex, alpha)?  
