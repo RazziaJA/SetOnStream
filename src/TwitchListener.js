@@ -23,11 +23,11 @@ function TwitchListener({ dispatch, twitchChannel, ...props}) {
         setIsConnected(true);
         client.on('message', (channel, tags, message, self) => {
             if (!self) {
-                const args = message.split(' ');
-                if (args.length === 3) {
-                    const n1 = Number(args[0]);
-                    const n2 = Number(args[1]);
-                    const n3 = Number(args[2]);
+                const split = message.split(' ');
+                if (split.length === 3) {
+                    const n1 = Number(split[0]);
+                    const n2 = Number(split[1]);
+                    const n3 = Number(split[2]);
                     if (Number.isInteger(n1) && n1 > 0 && n1 <= 21
                     && Number.isInteger(n2) && n2 > 0 && n2 <= 21
                     && Number.isInteger(n3) && n3 > 0 && n3 <= 21) {

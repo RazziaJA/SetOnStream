@@ -42,7 +42,7 @@ export default class SetGame {
         var possible_set = tableIndices.map(x => this.on_table[x]);
         const features = this.getFeatures(possible_set);
         var isSet = this.isSet(features);
-        this.guesses.push({playerName: player, guess: possible_set, wasSet: isSet});
+        this.guesses.push({playerName: player, guessed_cards: possible_set, wasSet: isSet});
         this.guesses = this.guesses.slice(-15);
         if (isSet) {
             var turn = (81 - (this.deck.length + this.on_table.length)) / 3;
