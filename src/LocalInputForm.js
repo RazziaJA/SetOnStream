@@ -5,7 +5,7 @@ function LocalInputForm({dispatch, ...props}) {
     const [input, setInput] = useState("");
 
     var handleSubmit = function(event) {
-        var split = input.split(" ");
+        var split = input.trim().split(" ");
         if (split.length === 3) {
             const n1 = Number(split[0]);
             const n2 = Number(split[1]);

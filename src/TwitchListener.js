@@ -23,7 +23,7 @@ function TwitchListener({ dispatch, twitchChannel, ...props}) {
         setIsConnected(true);
         client.on('message', (channel, tags, message, self) => {
             if (!self) {
-                const split = message.split(' ');
+                const split = message.trim().split(' ');
                 if (split.length === 3) {
                     const n1 = Number(split[0]);
                     const n2 = Number(split[1]);
